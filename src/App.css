@@ -1,6 +1,9 @@
 .App {
   text-align: center;
+  background-image: url("https://res.cloudinary.com/dylant25/image/upload/v1563056818/stars.jpg");
+
 }
+
 
 .App-logo {
   height: 40vmin;
@@ -30,9 +33,9 @@
 
 @keyframes App-logo-spin {
   from {
-    transform: rotate(0deg);
+    transform:scaleX();
   }
   to {
-    transform: rotate(360deg);
+    transform: scale();
   }
 }
