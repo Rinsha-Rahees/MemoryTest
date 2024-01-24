@@ -1,0 +1,19 @@
+.carditem .cardfront{
+    transform: rotateY(90deg);
+    transition: all ease-in 0.2s;
+}
+
+.flipped .cardfront{
+    transform: rotateY(0deg);
+    transition-delay: 0.2s;
+}
+
+.carditem .cardback{
+    transition: all ease-in 0.2s;
+    transition-delay: 0.2s;
+}
+
+.flipped .cardback{
+    transform: rotateY(90deg);
+    transition-delay: 0.2s;
+}
