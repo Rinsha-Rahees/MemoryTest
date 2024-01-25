@@ -137,15 +137,13 @@ function App() {
 
         </div>
 
-       <Congrats visibility={visibility}/>
+        {confetti && <Confetti/>}
+        <div>
+          <Congrats confetti={confetti} visibility={visibility}/>
+        </div>
 
         <div>
           <button className='text-lg mt-5 md:text-2xl p-2 border rounded-md' onClick={shuffleCards}>New Game</button>
-        </div>
-
-        {confetti && <Confetti/>}
-        <div>
-          <Congrats confetti={confetti}/>
         </div>
 
       </div>
