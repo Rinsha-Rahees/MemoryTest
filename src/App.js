@@ -1,6 +1,9 @@
 import SingleCard from './Components/SingleCard';
 import { useEffect, useState } from 'react';
 import './App.css';
+import Confetti, { ReactConfetti } from 'react-confetti';
+import Congrats from './Components/Congrats';
+import ScorePalette from './Components/ScorePalette';
 
 
 const cardImages = [
@@ -21,9 +24,14 @@ function App() {
   //To compare
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
+  
+  const [confetti, setConfetti] = useState(false);
+  const [visibility, setVisibility] = useState(["invisible"]);
+
 
   // shuffle cards
   const shuffleCards = () => {
+
     const shuffledCards = [...cardImages, ...cardImages]
     .sort(() => Math.random() - 0.5)
     .map((card) => ({ ...card, id: Math.random() }))
@@ -31,6 +39,7 @@ function App() {
     setChoiceOne(null)
     setChoiceTwo(null)
     setCards(shuffledCards) 
+    setVisibility(["invisible"])
     setTurns(0)
     setScore(0)
   }
@@ -41,13 +50,12 @@ function App() {
 
     //Not comparing here. Cos, it may not work. 
     // It's gonna fire first before it even updates the state
-
   }
 
   //Compare 2 selected cards
 
   // useEffect is gonna fire when the component 1st mounts once automatically
-  // and then it will fire the funcation again whenever a dependency changes
+  // and then it will fire the function again whenever a dependency changes
 
   useEffect(() => {
     
@@ -71,9 +79,19 @@ function App() {
       }
     }
   },[choiceTwo]) 
-console.log(cards)
+
   //dependency inside []. If we select a card and if we update choiceOne inside handleChoice,
   // It's ginna find this function useEffect() again. If we update choiceTwo, it gonna find again
+
+  //Confetti celebration
+  useEffect(() => {
+    if(score == 6){
+      setConfetti(true)
+      setVisibility(["visible"])
+      setTimeout(() => setConfetti(false), 10000)
+      setTimeout(() => shuffleCards(), 10000)
+    }
+  },[score])
 
   //Reset choices & uncrease turns
   const resetTurn = () => {
@@ -89,21 +107,24 @@ console.log(cards)
   },[])
 
   return (
-    <div className="App min-h-screen  text-white font-serif font-bold p-2">
-
-      <div className='score'>
-        <h5 className='subhead flex float-left ml-20 mt-10 text-lg md:text-2xl'>Turns: {turns}</h5>
-        <h5 className='subhead flex float-right mr-20 mt-10 text-lg md:text-2xl'>Score: {score}</h5>
+    <div className="App min-h-screen text-white font-serif font-bold p-2">
+      
+      <div className='text-xl flex flex-row float-left md:text-5xl sm:mt-2'>
+        <img src='Images\logo.png' 
+            alt='App Icon - lighten bulb'
+            width={50}
+            className='mr-1'/>
+        <h2 className='invisible md:visible'>Memory Test</h2>
       </div>
+      
+      <ScorePalette turns={turns} score={score}/>
 
-      <div className='content flex flex-col items-center'>
-
-        <div className='header p-2'>
-            <h2 className='heading text-2xl md:text-5xl'>Memory Test !</h2>
-            <h5 className='subhead text-lg md:text-2xl mt-5'>Match the tiles</h5>
+      <div className='flex flex-col items-center mt-20 justify-items-center'>
+        <div>
+            <h5 className='text-lg md:text-2xl mt-5'>Match the tiles !</h5>
         </div>
       
-        <div className='card-grid grid grid-cols-4 gap-0 mt-5'>
+        <div className='grid grid-cols-4 gap-0 mt-5'>
           {cards.map(card => (
            <SingleCard 
            key={card.id} 
@@ -113,10 +134,18 @@ console.log(cards)
            disabled={disabled}
            />
           ))}
+
         </div>
 
+       <Congrats visibility={visibility}/>
+
         <div>
-          <button className='newgame text-lg md:text-2xl mt-5 p-2 border rounded-md' onClick={shuffleCards}>New Game</button>
+          <button className='text-lg mt-5 md:text-2xl p-2 border rounded-md' onClick={shuffleCards}>New Game</button>
+        </div>
+
+        {confetti && <Confetti/>}
+        <div>
+          <Congrats confetti={confetti}/>
         </div>
 
       </div>
