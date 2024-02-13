@@ -1,7 +1,7 @@
 import SingleCard from './Components/SingleCard';
 import { useEffect, useState } from 'react';
 import './App.css';
-import Confetti, { ReactConfetti } from 'react-confetti';
+import Confetti from 'react-confetti';
 import Congrats from './Components/Congrats';
 import ScorePalette from './Components/ScorePalette';
 
@@ -59,7 +59,12 @@ function App() {
 
   useEffect(() => {
     
-    if(choiceOne && choiceOne){  //This is gonna fire initially & we don't have to do any comparison. Cos, this func will be triggered if we have choiceOne and if we don't have choiceTwo, won't go inside - So, there is no need of extra comparison. This will work only if we have 2 choices
+    if(choiceOne && choiceTwo){  
+      
+      //This is gonna fire initially & we don't have to do any comparison. 
+      // Cos, this func will be triggered if we have choiceOne and if we don't have choiceTwo, won't go inside - 
+      // So, there is no need of extra comparison. This will work only if we have 2 choices
+
       setDisabled(true)
       if(choiceOne.src === choiceTwo.src) {
         setScore(prevScore => prevScore + 1)
@@ -88,8 +93,8 @@ function App() {
     if(score == 6){
       setConfetti(true)
       setVisibility(["visible"])
-      setTimeout(() => setConfetti(false), 10000)
-      setTimeout(() => shuffleCards(), 10000)
+      setTimeout(() => setConfetti(false), 5000)
+      setTimeout(() => shuffleCards(), 5000)
     }
   },[score])
 
