@@ -1,0 +1,10 @@
+1. Animation on win & automatically restart game - DONE
+2. Favicon transparent - DONE
+
+3. Animation for matched cards 
+4. Can make this infinite :-	 
+	a) Infinite loops: after matching it flips again, infinite score
+		OR
+	b) Images array change + add number of grids -Levels (API - Online)
+	
+5. Share on Socials
