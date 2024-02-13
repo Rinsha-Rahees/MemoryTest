@@ -3,7 +3,7 @@
 * There are 12 tiles.
 * You can match the pairs.
 
-**🧑‍💻How is it built?**
+**👩‍💻How is it built?**
 * Built using **React, React Hooks and Tailwind CSS**
 * Deployed using **Vercel** https://vercel.com/
 * It has simple looks and functionality.
